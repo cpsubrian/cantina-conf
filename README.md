@@ -1,4 +1,3 @@
-cantina-conf
-============
+# Cantina: Conf #
 
 Cantina configuration service
