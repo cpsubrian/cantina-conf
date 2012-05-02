@@ -18,7 +18,8 @@
     "nconf": "~0.5.1"
   },
   "devDependencies": {
-    "mocha": "~1.0.3"
+    "mocha": "~1.0.3",
+    "chai": "~0.5.3"
   },
   "optionalDependencies": {
     "nconf-redis": "~0.3.1",
