@@ -2,7 +2,7 @@ Cantina: Conf
 ==============
 
 This service provides a distributed configuration endpoint with several
-opional persistence back-ends.
+optional persistence back-ends.
 
 
 Command-line Startup Options
@@ -32,10 +32,12 @@ amino requests.
 
 ### Get the value of a configuration variable ###
 
+```js
     amino.request('amino://conf/path/to/your/variable', function(err, response, body) {
       // Body will contain your value.
       console.log(body);
     });
+```
 
 You can fetch a hierarchy of configuration by requesting just part
 of a path.
