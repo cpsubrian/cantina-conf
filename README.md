@@ -1,8 +1,10 @@
 Cantina: Conf
 ==============
 
-This service provides a distributed configuration endpoint with several
-optional persistence back-ends.
+This service provides a distributed configuration endpoint for
+[Cantina](https://github.com/cantina) apps with several optional
+persistence back-ends.  Its powered by the [Amino](https://github.com/cantina/amino)
+clustered application toolkit.
 
 
 Command-line Startup Options
@@ -49,7 +51,7 @@ amino.request('amino://conf/path/to', function(err, response, body) {
 });
 ```
 
-To fetch the full configuration, just request '/'.
+To fetch the full configuration, just request '/'.mak
 
 ```js
 amino.request('amino://conf', function(err, response, body) {
