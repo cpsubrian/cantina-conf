@@ -3,14 +3,28 @@
  */
 
 var assert = require('chai').assert,
+    fs = require('fs'),
     conf = require('../'),
     amino = require('amino');
 
-describe('Configuration: Memory Store', function() {
+describe('Configuration: File Store', function() {
+  var filepath = 'test/file-store-test-config.json';
+
+  // Write some data to a config file and set up file store.
   before(function(done) {
-    conf.parseOptions(['-s', 'memory'])
-    conf.reset();
-    done();
+    fs.open(filepath, 'w+', function(err, fd) {
+      fs.write(fd, JSON.stringify({cobwebs: 'were here'}));
+      fs.close(fd, function(err) {
+        conf.parseOptions(['-s', 'file', '-f', filepath])
+        conf.reset();
+        done();
+      });
+    });
+  });
+
+  // Delete temp config file.
+  after(function(done) {
+    fs.unlink(filepath, done);
   });
 
   it('sets and gets single key/value combination via PUT', function(done) {
@@ -71,7 +85,7 @@ describe('Configuration: Memory Store', function() {
   it('gets the whole configuration', function(done) {
     amino.request('amino://conf', function(err, response, body) {
       assert.ifError(err);
-      assert.deepEqual(body, {color: 'red', favorites: {movie: 'The Matrix', band: 'Metallica'}});
+      assert.deepEqual(body, {cobwebs: 'were here', color: 'red', favorites: {movie: 'The Matrix', band: 'Metallica'}});
       done();
     });
   });
@@ -88,7 +102,7 @@ describe('Configuration: Memory Store', function() {
 
       amino.request('amino://conf', function(err, response, body) {
         assert.ifError(err);
-        assert.deepEqual(body, {color: 'red', favorites: {tv: 'Game of Thrones'}, name: 'Brian'});
+        assert.deepEqual(body, {cobwebs: 'were here', color: 'red', favorites: {tv: 'Game of Thrones'}, name: 'Brian'});
         done();
       });
     });
