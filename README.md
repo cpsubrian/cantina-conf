@@ -1,3 +1,6 @@
+**This module is deprecated.  It was a proof of concept but is no longer necessary.**
+___
+
 Cantina: Conf
 ==============
 
